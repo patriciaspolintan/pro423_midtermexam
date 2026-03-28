@@ -1,28 +1,16 @@
-REMIX DEFAULT WORKSPACE
+# PoultryChain: Smart Contract for Egg Traceability
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+## Description
+This project implements a transparent supply chain for poultry products. It tracks the lifecycle of egg batches from the moment they are packaged at the farm until they reach the distributor.
 
-This workspace contains 3 directories:
+## Features
+- **Immutable Ledger:** Uses Ethereum-based logic to prevent data tampering.
+- **Role-Based Access:** Only the assigned Farmer can register stock; only the assigned Distributor can confirm receipt.
+- **Traceability:** Full ownership history is stored in an array for every product ID.
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
-
-SCRIPTS
-
-The 'scripts' folder has two typescript files which help to deploy the 'Storage' contract using 'ethers.js' libraries.
-
-For the deployment of any other contract, just update the contract name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts`
-
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
-
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
-
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+## Sample Test Steps
+1. Deploy contract with Farmer (Account A) and specify Distributor (Account B).
+2. Farmer calls `registerProduct()`.
+3. Farmer calls `transferToDistributor()`.
+4. Switch to Account B, call `markAsDelivered()`.
+5. Call `getProductHistory()` to see the audit trail.
